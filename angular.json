@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "matches-reservation"
+    }
+  },
+  "defaultProject": "matches-reservation",
+  "cli": {
+    "analytics": false
+  }
 }
