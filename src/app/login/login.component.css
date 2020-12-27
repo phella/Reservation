@@ -7,7 +7,7 @@
 }
 
 #container{
-    width: 40%;
+    width: auto;
     height: 410px;
     margin: auto;
     border-radius: 15px;
@@ -24,7 +24,26 @@
     font-size: 2em;
 }
 
+#title {
+    position: relative;
+    top: 30%;
+    padding: 20px;
+}
+
 button{
     float: right;
     font-size: larger;
+    margin-right: 10px;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+    #header {
+      font-size: 1.4em;
+    }
+    #container {
+        width: 80%;
+        height: 420px;
+    }
+  }

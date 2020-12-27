@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup , FormBuilder} from '@angular/forms';
+import {FormGroup , FormBuilder, Validators} from '@angular/forms';
+import { Router } from "@angular/router";
+
+import { RequestService } from ".././request.service"
 
 @Component({
   selector: 'app-login',
@@ -8,15 +11,76 @@ import {FormGroup , FormBuilder} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  forms: FormGroup[];
+  forms: FormGroup[] = new Array<FormGroup>(3);
+  currentForm: number = 0;
+  gender: Boolean = true;
+  type: Boolean = true;
+  minDate = new Date(1920, 1);
+  maxDate = new Date(2020, 1);
+  txt: String = "Next"
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder, private request: RequestService, private router: Router) { }
 
   ngOnInit(): void {
     this.forms[0] = this.fb.group({
-      message: [''],
-      file : [null]
+      firstname: ['', Validators.required],
+      lastname : ['', Validators.required],
+      username : ['', Validators.required],
+      password : ['', Validators.required]
       });
+
+    this.forms[1] = this.fb.group({
+      birthdate:['', Validators.required],
+      city:['', Validators.required]
+    });
+
+    this.forms[2] = this.fb.group({
+      address:[''],
+      email:['', Validators.required]
+    });
+
+    // this.forms[1].validator = () => {return this.gender !== null;}
+  }
+
+  hasValue(): Boolean{
+    return true;
+  }
+
+  setGender(gender: Boolean): void {
+    this.gender = gender;
+  }
+
+  setType(type: Boolean): void {
+    this.type = type;
+  }
+
+  next(): void {
+    if(this.currentForm === 0) {
+      this.currentForm = 1;
+      // check username before going next
+    } else if ( this.currentForm === 1) {
+      this.forms[1].value.gender = this.gender;
+      this.currentForm = 2;
+      this.txt = "Submit";
+    } else {
+      this.request.signup( Object.assign({}, this.forms[0].value, this.forms[1].value, this.forms[2].value)).subscribe(res => {
+        if(res)
+          this.router.navigate(['login']);
+      });
+    }
+    
+  }
+
+  prev(): void {
+    switch(this.currentForm){
+      case(1):
+        this.currentForm = 0;
+        break;
+      case(2):
+        this.currentForm = 1;
+        this.txt = "next";
+        break;
+    }
   }
 
 }

@@ -1,54 +1,77 @@
 <div id="background">
-    <nav>
-
-    </nav>
 
     <div id="container">
         <div id="header">
-            <span style="vertical-align: -webkit-baseline-middle;"> REGISTRATION FORM </span>
+            <span id="title"> REGISTRATION FORM </span>
         </div>
-        <form style="margin: 10px;" [formGroup]="forms[0]">
+        <!--First form-->
+        <form style="margin: 10px;" *ngIf="currentForm == 0" [formGroup]="this.forms[0]">
             <div class="row">
                 <div class="col">
                     <label >First Name</label>
-                    <input  type="text" autocomplete="off"  class="form-control" formControlName="firstname">
+                    <input #firstname  type="text" autocomplete="off"  class="form-control" formControlName="firstname">
                 </div>
                 <div class="col">
                     <label >Last Name</label>
-                    <input  type="text" autocomplete="off"  class="form-control" formControlName="lastname">    
+                    <input #secondname type="text" autocomplete="off"  class="form-control" formControlName="lastname">    
                 </div>
             </div>
             <div class="form-group">
                 <label >Username</label>
-                <input  type="text" autocomplete="off"  class="form-control" formControlName="username">
+                <input #username type="text" autocomplete="off"  class="form-control" formControlName="username">
             </div>
             <div class="form-group">
                 <label >Passowrd</label>
-                <input  type="password" class="form-control" formControlName="password">
+                <input #password type="password" class="form-control" formControlName="password">
             </div>
-            <button type="submit" class="btn btn-primary">Next </button>
         </form>
 
-        <form style="margin: 10px;" *ngIF="false">
-            <div class="row">
-                <div class="col">
-                    <label >First Name</label>
-                    <input  type="text" autocomplete="off"  class="form-control" formControlName="firstname">
-                </div>
-                <div class="col">
-                    <label >Last Name</label>
-                    <input  type="text" autocomplete="off"  class="form-control" formControlName="lastname">    
-                </div>
-            </div>
+        
+        <form style="margin: 10px;" *ngIf="currentForm == 1" [formGroup]="this.forms[1]">
             <div class="form-group">
-                <label >Username</label>
-                <input  type="text" autocomplete="off"  class="form-control" formControlName="username">
-            </div>
-            <div class="form-group">
-                <label >Passowrd</label>
-                <input  type="password" class="form-control" formControlName="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Next </button>
+                <label> Birth Date</label>
+                <div style="display:block">
+                    <input matInput [matDatepicker]="picker" formControlName="birthdate" #birthdate [min]="minDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                </div>
+                    <div class="form-group">
+                        <label> Gender </label><br>
+                        <div class="btn-group" role="group" aria-label="Gender">
+                            <button type="button" class="btn btn-primary" (click)="setGender(true)" [ngClass]="{'btn-primary': gender === true, 'btn-default': gender === false }">Male</button>
+                            <button type="button" class="btn btn-default" (click)="setGender(false)" [ngClass]="{'btn-primary': gender === false, 'btn-default': gender === true }">Female</button>
+                        </div>
+                    </div>
+                    <label> City </label><br>
+                    <select class="form-control" formControlName="city">
+                        <option value="Cairo"> Cairo </option>
+                        <option Value="Alexandria"> Alexandria </option>
+                        <option value="Aswan"> Aswan </option>
+                        <option value="Giza"> Giza </option>
+                      </select>
+                </div>
         </form>
+
+        <!-- Third form -->
+        <form style="margin: 10px;" *ngIf="currentForm == 2" [formGroup]="this.forms[2]">
+            <div class="form-group">
+                <label >Address</label>
+                <input #address type="text" autocomplete="off"  class="form-control" formControlName="address">
+            </div>
+            <div class="form-group">
+                <label >Email</label>
+                <input #email type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+                <div class="btn-group" role="group" aria-label="Type">
+                    <button type="button" class="btn btn-primary" (click)="setType(true)" [ngClass]="{'btn-primary': type === true, 'btn-default': type === false }">Fan</button>
+                    <button type="button" class="btn btn-default" (click)="setType(false)" [ngClass]="{'btn-primary': type === false, 'btn-default': type === true }">Manager</button>
+                </div>
+            </div>
+        </form>
+
+
+        <button (click)="next()" class="btn btn-primary" [disabled]="forms[currentForm].invalid"> {{txt}} </button>
+        <button (click)="prev()" class="btn btn-primary" *ngIf="currentForm !== 0">Prev </button>
     </div>
 </div>
