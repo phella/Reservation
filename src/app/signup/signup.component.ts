@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
       if(res)
         this.router.navigate(['home']);
       else
-        this.wrong = true;;   
+        this.wrong = true;
     });
   }
 }
