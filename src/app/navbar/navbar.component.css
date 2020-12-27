@@ -1,0 +1,19 @@
+.flex-container {
+    display: flex;
+    background-color: #1ec74e;
+    color:white;
+}
+
+.flex-item {
+    width: 33%;
+    text-align: center;
+    height: 70px;
+    bottom: -20px;
+    position: relative;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.active {
+    color: darkblue;
+}

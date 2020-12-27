@@ -15,6 +15,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     ManagerComponent,
     CustomerComponent,
     AdminComponent,
-    SignupComponent
+    SignupComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
