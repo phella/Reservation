@@ -1,5 +1,9 @@
 <div id="background">
     <div id="container">
+        <img src="../../assets/tazkarti.svg" style="margin:auto;">
+        <h3 style="text-align: center;">
+            Sign in
+        </h3>
         <form style="margin: 10px;" [formGroup]="loginForm">
             <div class="form-group">
                 <label >Username</label>
@@ -14,8 +18,11 @@
             <div  *ngIF="this.wrong" class="alert alert-danger" role="alert">
                 Invalid Username or Password
             </div>
-
-            <button (click)="submit()" class="btn btn-primary" [disabled]="loginForm.invalid"> log in </button>
+            <div class="form-group" style="height: 8px;">
+                <button (click)="submit()" class="btn btn-primary" [disabled]="loginForm.invalid"> log in </button>
+            </div>
         </form>
+        <br>
+        <a [routerLink]="'/signup'" style="float:right"> not registered yet? </a>
     </div>
 </div>

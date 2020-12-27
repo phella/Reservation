@@ -21,8 +21,26 @@ button{
     margin-right: 10px;
 }
 
+img {
+    animation: move 5s infinite;
+}
+    
+
 @media only screen and (max-width: 600px) {
     #container {
         width: 80%;
     }
   }
+
+@keyframes move {
+  80%, 100% {
+    opacity: 0;
+    transform: translate(200px, 0);
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+}
