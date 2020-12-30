@@ -6,4 +6,5 @@ export interface Match {
     main_referee: string;
     line_man1: string;
     line_man2: string;
+    seats: Array<Array<Boolean>>;
 }
