@@ -27,4 +27,8 @@ export class RequestService {
   login(user): Observable<{Boolean}> {
     return this.http.post<{Boolean}>(`${this.base}user/login`, user)
   }
+
+  purchase(obj): Observable<{msg: string}> {
+    return this.http.post<{msg: string}>(`${this.base}user/purchase`, obj)
+  }
 }

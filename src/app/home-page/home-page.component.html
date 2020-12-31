@@ -24,19 +24,54 @@
             {{match?.match_venue + " Stadium"}}
         </p>
         <div class="reserve" *ngIf="visiblity[m]">
-            <div class="step1">
+            <div class="step1" *ngIf="!visiblity2[m]">
                 <div class="seats">
                     <div *ngFor="let row of match.seats; let i = index" class="ro">
                         <div *ngFor="let col of row; let j = index" id="{{ m + '/' + i + '/' + j}}" class="seat" (click)="request(m, i, j)" 
                             [ngClass]="{'reserved': seats[m][i][j] == 2, 'pending': seats[m][i][j] == 1 }">
-                            {{ i*3 + j + 1}}
+                            {{ i * match.seats[0].length  + j + 1}}
                         </div>
                     </div>
                 </div>
+                <div class="footer">
+                    <div style="display: inline-block;">
+                        <ul>
+                            <li style="color:grey;"> Free seats</li>
+                            <li style="color: red"> Reserved seats </li>
+                            <li style="color:green"> Your Pending seats </li>
+                        </ul>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn btn-primary" style="margin: 20px;" (click)="proceed(m)"> Proceed</button>
+                    </div>    
+                </div>
             </div>
-            <div class="payment">
-
+            <div class="payment" *ngIf="visiblity2[m]">
+                <div *ngFor="let seat of getSeatsNumbers(m)" class="seat pending" >
+                    {{seat + 1}}
+                </div>                
+                <form style="margin: 10px;" [formGroup]="payForm">
+                    <div class="form-group">
+                        <label >Credit Card Number</label>
+                        <input #credit type="number" autocomplete="off"  class="form-control" formControlName="credit">
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="credit[m]">
+                        Wrong Credit card number
+                    </div>
+                    <div class="form-group">
+                        <label >Pin Number</label>
+                        <input #bin type="password" class="form-control" formControlName="bin" maxlength="4" size="4">
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf= "taken[m]">
+                        Seats already taken
+                    </div>
+                </form>
+                    <div style="float:right">
+                    <button class="btn btn-primary" style="margin: 20px;" (click)="back(m)"> Back</button>
+                    <button class="btn btn-primary" style="margin: 20px;" (purchase)="purchase(m)"> Purchase</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
