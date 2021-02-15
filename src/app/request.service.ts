@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 })
 export class RequestService {
 
-  base: String = "localhost:4200/"
+  base: String = "localhost:3000/"
   constructor(private http: HttpClient) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
@@ -25,7 +25,7 @@ export class RequestService {
   }
 
   login(user): Observable<{Boolean}> {
-    return this.http.post<{Boolean}>(`${this.base}user/login`, user)
+    return this.http.post<{Boolean}>(`${this.base}users/signin`, user)
   }
 
   purchase(obj): Observable<{msg: string}> {
