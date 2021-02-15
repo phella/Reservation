@@ -9,17 +9,20 @@
             <div class="row">
                 <div class="col">
                     <label >First Name</label>
-                    <input #firstname  type="text" autocomplete="off"  class="form-control" formControlName="firstname">
+                    <input #firstname  type="text" autocomplete="off"  class="form-control" formControlName="first_name">
                 </div>
                 <div class="col">
                     <label >Last Name</label>
-                    <input #secondname type="text" autocomplete="off"  class="form-control" formControlName="lastname">    
+                    <input #secondname type="text" autocomplete="off"  class="form-control" formControlName="last_name">    
                 </div>
             </div>
             <div class="form-group">
                 <label >Username</label>
                 <input #username type="text" autocomplete="off"  class="form-control" formControlName="username">
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="validUser">
+                This username is already taken
+              </div>
             <div class="form-group">
                 <label >Passowrd</label>
                 <input #password type="password" class="form-control" formControlName="password">
