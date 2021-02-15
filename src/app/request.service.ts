@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 })
 export class RequestService {
 
-  base: String = "localhost:3000/"
+  base: String = "http://localhost:3000/"
   constructor(private http: HttpClient) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
