@@ -18,13 +18,14 @@ export class LoginComponent implements OnInit {
   minDate = new Date(1920, 1);
   maxDate = new Date(2020, 1);
   txt: String = "Next"
+  validUser: Boolean = false;
 
   constructor( private fb: FormBuilder, private request: RequestService, private router: Router) { }
 
   ngOnInit(): void {
     this.forms[0] = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname : ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name : ['', Validators.required],
       username : ['', Validators.required],
       password : ['', Validators.required]
       });
@@ -56,14 +57,19 @@ export class LoginComponent implements OnInit {
 
   next(): void {
     if(this.currentForm === 0) {
-      this.currentForm = 1;
+      this.request.checkUser(this.forms[0].value.username).subscribe( res => {
+        if(res)
+          this.currentForm = 1;
+        else
+          this.validUser = true;
+      });
       // check username before going next
     } else if ( this.currentForm === 1) {
       this.forms[1].value.gender = this.gender;
       this.currentForm = 2;
       this.txt = "Submit";
     } else {
-      this.request.signup( Object.assign({}, this.forms[0].value, this.forms[1].value, this.forms[2].value)).subscribe(res => {
+      this.request.signup( Object.assign({}, this.forms[0].value, this.forms[1].value, this.forms[2].value, {role: this.type})).subscribe(res => {
         if(res)
           this.router.navigate(['login']);
       });

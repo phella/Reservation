@@ -9,19 +9,19 @@ import { Observable } from "rxjs";
 })
 export class RequestService {
 
-  base: String = "localhost:3000/"
+  base: String = "http://localhost:3000/"
   constructor(private http: HttpClient) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
     const userNameSent = userName
       ? { params: new HttpParams().set("username", userName) }
       : {};
-    return this.http.get<{Boolean}>(`${this.base}user/signup`, userNameSent);
+    return this.http.get<{Boolean}>(`${this.base}users/check`, userNameSent);
   }
   
   signup(user): Observable<{Boolean}> {
     // console.log(user);
-    return this.http.post<{Boolean}>(`${this.base}user/check`, user);
+    return this.http.post<{Boolean}>(`${this.base}users/signup`, user);
   }
 
   login(user): Observable<{Boolean}> {
