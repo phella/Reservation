@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CreateMatchComponent } from './create-match/create-match.component';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
                             // ]
                         },
                         {path:'customer' , component: CustomerComponent},
-                        {path:'admin' , component: AdminComponent}
+                        {path:'admin' , component: AdminComponent},
+                        {path:'create-match', component: CreateMatchComponent}
                       ]; 
 
 @NgModule({
@@ -41,7 +43,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     CustomerComponent,
     AdminComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreateMatchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,81 @@
+<div id="background">
+    <div id="container">
+        <h3 style ="text-align:center"> Create match event</h3>
+        <form style="margin: 10%;">
+            <!-- Home team name -->
+            <div id="form-group">
+                <label for="homeTeam">Home Team Name </label>
+                <input 
+                required 
+                ngModel name="homeTeam" #homeTeam="ngModel" 
+                change="log(homeTeam)" 
+                id="homeTeam" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="homeTeam.touched && !homeTeam.valid">Home Team name is required</div>
+            </div>
+            <!-- Away team name -->
+            <div class="form-group">
+                <label for="awayTeam">Away Team Name </label>
+                <input 
+                required 
+                ngModel name="awayTeam" #awayTeam="ngModel" 
+                change="log(awayTeam)" 
+                id="awayTeam" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="awayTeam.touched && !awayTeam.valid">Away Team name is required</div>
+            </div>
+            <!-- Date -->
+            <div class="form-group">
+                <label for="date"> Match Date  </label>
+                <div style="margin: 2px;">
+                    <input matInput [matDatepicker]="picker" required ngModel name="date" #date="ngModel" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+                
+                <div class="alert alert-danger" *ngIf="date.touched && !date.valid">Date is required</div>
+            </div>
+            <!-- Stadium name -->
+            <div class="form-group">
+                <label style="margin: 2px;" for="Stadium"> Stadium </label>
+                <div ng-app="myApp" ng-controller="myCtrl" required ngModel name="stadiumName" #stadiumName="ngModel">
+                    <select ng-model="selectedName" ng-options="x for x in names">
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="stadiumName.touched && !stadiumName.valid">Satadium name is required</div>
+            </div>
+            <!-- Main Refree name -->
+            <div class="form-group">
+                <label for="mainRefree">Mian Refree Name </label>
+                <input 
+                required 
+                ngModel name="mainRefree" #mainRefree="ngModel" 
+                change="log(mainRefree)" 
+                id="mainRefree" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="mainRefree.touched && !mainRefree.valid">Main Refree name is required</div>
+            </div>
+            <!-- Lines man 1 name -->
+            <div class="form-group">
+                <label for="lines1Man">Lines Man 1 Name </label>
+                <input 
+                required 
+                ngModel name="lines1Man" #lines1Man="ngModel" 
+                change="log(lines1Man)" 
+                id="lines1Man" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="lines1Man.touched && !lines1Man.valid">Lines Man 1 name is required</div>
+            </div>
+            <!-- Lines man 2 name -->
+            <div class="form-group">
+                <label for="lines2Man">Lines Man 2 Name </label>
+                <input 
+                required 
+                ngModel name="lines2Man" #lines2Man="ngModel" 
+                change="log(lines2Man)" 
+                id="lines2Man" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="lines2Man.touched && !lines2Man.valid">Lines Man 2 name is required</div>
+            </div>
+            <div class="form-group" style="height: 8px;">
+                <button  (click)="submit()" class="btn btn-primary" > Submit </button>
+            </div>
+        </form>
+        
+    </div>
+</div>
