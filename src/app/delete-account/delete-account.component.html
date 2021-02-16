@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<div class="input-group search-bar">
+    <input id="search-username" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+      aria-describedby="search-addon" />
+    <button (click)="onclick()" type="button" class="btn btn-outline-primary">search</button>
+</div>
+<div class="users-list">
+    <ul id="list1" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users; let idx = index"> 
+            Name: {{user.first_name}} {{user.last_name}} <br>
+            Username: {{ user.username }} <br>
+            Gender: {{user.gender}} <br>
+            Role: {{user.role == false ? "fan" : "manager"}} <br>
+            <button (click)="deleteAccount(idx)" type="button" class="btn btn-danger">Delete</button>
+        </li>
+    </ul>
+</div>
+

@@ -1,3 +1,4 @@
+import { AdminService } from './admin/admin.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
@@ -12,10 +13,11 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { CustomerComponent } from './customer/customer.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminApproveComponent } from './admin/adminApprove.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -29,7 +31,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
                             // ]
                         },
                         {path:'customer' , component: CustomerComponent},
-                        {path:'admin' , component: AdminComponent}
+                        {path:'admin/approve' , component: AdminApproveComponent},
+                        {path:'admin/deleteAccount' , component: DeleteAccountComponent}
                       ]; 
 
 @NgModule({
@@ -39,9 +42,10 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     LoginComponent,
     ManagerComponent,
     CustomerComponent,
-    AdminComponent,
+    AdminApproveComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     MatNativeDateModule
   ],
   providers: [
-  
+    AdminService
   ],
   bootstrap: [AppComponent]
 })
