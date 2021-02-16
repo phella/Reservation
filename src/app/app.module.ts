@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { AddTokenInterceptor } from './add-token.interceptor';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -58,7 +60,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     MatNativeDateModule
   ],
   providers: [
-    AdminService
+    AdminService,
+    {provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

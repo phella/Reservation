@@ -12,7 +12,7 @@ import { RequestService } from '../request.service';
 export class HomePageComponent implements OnInit {
 
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  matches: Match[] = new Array(4);
+  matches: Match[];
   pending: {match, row, col}[] = [];
   seats: Object[] = [];
   visiblity: Boolean[];
@@ -29,6 +29,10 @@ export class HomePageComponent implements OnInit {
       credit : ['', Validators.required],
       bin : ['', Validators.required]
       });
+
+    this.req.getMatches().subscribe( res => {
+      this.matches = res;
+    });
 
     let temp: Array<Array<Boolean>> = new Array();
     for( let i = 0 ; i < 20; i++){
