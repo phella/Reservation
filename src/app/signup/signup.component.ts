@@ -12,7 +12,8 @@ import { RequestService } from '../request.service';
 export class SignupComponent implements OnInit {
 
   loginForm: FormGroup;
-  wrong: Boolean;
+  wrong: Boolean = false;
+  error_message: String;
 
   constructor(private fb: FormBuilder, private request: RequestService, private router:Router) { }
 
@@ -21,15 +22,19 @@ export class SignupComponent implements OnInit {
       email : ['', Validators.required],
       password : ['', Validators.required]
       });
-
   }
 
   submit():void {
-    this.request.login(this.loginForm.value).subscribe( res => {
-      if(res)
+    this.request.login(this.loginForm.value).subscribe( 
+      res => {
+        localStorage.setItem('TOKEN', res.token);
         this.router.navigate(['home']);
-      else
+      },
+      err => {
+        console.log(err.error.message);
         this.wrong = true;
-    });
+        this.error_message = err.error.message;
+      }
+    );
   }
 }
