@@ -19,6 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreateMatchComponent } from './create-match/create-match.component';
 
 
+
 const routes: Routes = [{ path: '', component: HomePageComponent },
                         { path: 'signup', component: LoginComponent},
                         { path: 'login', component: SignupComponent},
@@ -54,7 +55,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     HttpClientModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
   
