@@ -1,0 +1,11 @@
+button{
+    float: right;
+    font-size: larger;
+    margin-right: 10px;
+}
+
+.users-list{
+    margin-top: 50px;
+    padding-right: 20%;
+    padding-left: 20%;
+}

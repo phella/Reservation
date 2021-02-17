@@ -1,0 +1,17 @@
+.search-bar{
+    margin-top: 100px;
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+.users-list{
+    margin-top: 50px;
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+button{
+    float: right;
+    font-size: larger;
+    margin-right: 10px;
+}

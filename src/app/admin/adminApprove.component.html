@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="users-list">
+    <ul id="list1" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users; let idx = index"> 
+            Name: {{user.first_name}} {{user.last_name}} <br>
+            Username: {{ user.username }} <br>
+            Gender: {{user.gender}} <br>
+            Role: {{user.role == false ? "fan" : "manager"}} <br>
+            <button (click)="approveUser(idx)" id="b1" type="button" class="btn btn-success">Approve</button>
+            <button (click)= "rejectUser(idx)" id="b2" type="button" class="btn btn-danger">Cancel</button>
+        </li>
+    </ul>
+</div>

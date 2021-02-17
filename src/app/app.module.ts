@@ -1,8 +1,10 @@
+import { AdminService } from './admin/admin.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -12,12 +14,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { CustomerComponent } from './customer/customer.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminApproveComponent } from './admin/adminApprove.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CreateMatchComponent } from './create-match/create-match.component';
-
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { AddTokenInterceptor } from './add-token.interceptor';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -31,8 +33,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
                             // ]
                         },
                         {path:'customer' , component: CustomerComponent},
-                        {path:'admin' , component: AdminComponent},
-                        {path:'create-match', component: CreateMatchComponent}
+                        {path:'admin/approve' , component: AdminApproveComponent},
+                        {path:'admin/deleteAccount' , component: DeleteAccountComponent}
                       ]; 
 
 @NgModule({
@@ -42,10 +44,10 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     LoginComponent,
     ManagerComponent,
     CustomerComponent,
-    AdminComponent,
+    AdminApproveComponent,
     SignupComponent,
     NavbarComponent,
-    CreateMatchComponent
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     MatNativeDateModule,
   ],
   providers: [
-  
+    AdminService,
+    {provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
