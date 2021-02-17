@@ -37,7 +37,7 @@ export class RequestService {
     return this.http.post<{msg: string}>(`${this.base}user/purchase`, obj)
   }
 
-  getMatches(): Observable<Match[]> {
-    return this.http.get<Match[]>(`${this.base}fans/getallmatches`)
+  getMatches(): Observable<{matches}> {
+    return this.http.get<{matches}>(`${this.base}fans/getallmatches`)
   }
 }

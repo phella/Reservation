@@ -31,38 +31,22 @@ export class HomePageComponent implements OnInit {
       });
 
     this.req.getMatches().subscribe( res => {
-      this.matches = res;
+      this.matches = res["matches"];
+      this.matches.forEach( el => {
+        el.date = new Date(el.date);;
+      })
+      console.log(this.matches)
+      this.setSeats();
+
+      // UI variables
+      this.visiblity = new Array(this.matches.length).fill(false);
+      this.visiblity2 = new Array(this.matches.length).fill(false);
+      this.taken = new Array(this.matches.length).fill(false);
+      this.credit = new Array(this.matches.length).fill(false);
+
+      console.log( typeof this.matches[0].date)
     });
 
-    let temp: Array<Array<Boolean>> = new Array();
-    for( let i = 0 ; i < 20; i++){
-      let temp2 = new Array();
-      for ( let j = 0; j < 20; j++) {
-        temp2.push(false);
-      }
-      temp.push(temp2);
-    }
-    this.matches[0] = {home_team: 'Al Ahly', away_team: 'Al Zamalek', match_venue: 'Borg El Arab',date: new Date(),main_referee: 'Ehab Tawfek',
-                        line_man1: 'Hmada El Gn', line_man2: 'Hossam Ahmed',seats: temp
-                      };
-    for( let m = 0; m < this.matches.length; m++) {
-      let new_temp = [];
-      if(this.matches[m]) {
-      for(let i = 0; i < this.matches[m].seats.length; i++){
-        let row = [];
-        for(let j = 0; j < this.matches[m].seats[i].length; j++){
-          if(this.matches[m].seats[i][j] == true) row.push(2);
-          else row.push(0);
-        }
-        new_temp.push(row);
-      }
-      this.seats.push(new_temp);
-    }
-    }
-    this.visiblity = new Array(this.matches.length).fill(false);
-    this.visiblity2 = new Array(this.matches.length).fill(false);
-    this.taken = new Array(this.matches.length).fill(false);
-    this.credit = new Array(this.matches.length).fill(false);
   }
 
   toggleView(index): void {
@@ -126,5 +110,24 @@ export class HomePageComponent implements OnInit {
           this.taken[match] = true;
         }
     });
+  }
+
+  setSeats(): void {
+    console.log(this.matches)
+    for( let m = 0; m < this.matches.length; m++) {
+      let new_temp = [];
+      if(this.matches[m]) {
+        for(let i = 0; i < this.matches[m].seats.length; i++){
+          let row = [];
+          for(let j = 0; j < this.matches[m].seats[i].length; j++){
+            if(this.matches[m].seats[i][j] == true) row.push(2);
+            else row.push(0);
+          }
+          new_temp.push(row);
+        }
+        this.seats.push(new_temp);
+        console.log(this.seats);
+      }
+    }
   }
 }
