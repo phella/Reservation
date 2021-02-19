@@ -8,7 +8,8 @@ import {FormGroup , FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./create-match.component.css'],
 })
 export class CreateMatchComponent implements OnInit {
-  stadiums = []
+  stadiums = [];
+  dict = {};
   title = 'Bind DropDownList';
   ddlProduct = "";
   log(x){console.log(x);}
@@ -21,9 +22,11 @@ export class CreateMatchComponent implements OnInit {
       var i;
       for (i = 0; i < data.stadium.length; i++) {
         this.stadiums.push(data.stadium[i].name)
+        this.dict[data.stadium[i].name]=[data.stadium[i]._id]
       }
     });
     console.log(this.stadiums)
+    console.log(this.dict)
   }
 
   submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue):void {
@@ -34,11 +37,27 @@ export class CreateMatchComponent implements OnInit {
     console.log(lines1ManValue.value)
     console.log(lines2ManValue.value)
     console.log(this.ddlProduct)
-    // const headers = { 'Authorization': 'Bearer my-token'};
-    // const body = { title: 'Angular POST Request Example' };
-    // this.http.post<any>('https://jsonplaceholder.typicode.com/posts', body, { headers }).subscribe(data => {
-    //     console.log(data)
-    // });
+    localStorage.getItem('token')
+
+    const headers = { };
+    const body = {
+    "home_team":homeTeamValue.value.toString(),
+    "away_team":awayTeamValue.value.toString(),
+    "date":new Date(dateValue.value),
+    "match_venue":this.dict[this.ddlProduct].toString(),
+    "stadium":this.ddlProduct,
+    "main_referee":mainRefreeValue.value.toString(),
+    "line_man1":lines1ManValue.value.toString(),
+    "line_man2":lines2ManValue.value.toString() 
+  };
+    try{
+      this.http.post<any>('http://localhost:3000/manager/match', body, { headers }).subscribe(data => {
+        console.log(data)
+    });
+    }catch(error){
+      console.log(error)
+    }
+    
   }
 
 }

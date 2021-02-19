@@ -1,0 +1,24 @@
+#background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: auto;
+    height: 100%;
+    background: #E0E0E0;
+    overflow: scroll;
+}
+
+#container{
+    height:auto;
+    width: 60%;
+    margin :  auto;
+    padding: 15px;
+    border-radius: 15px;
+    border-color: black;
+    background-color: white;
+    overflow:hidden;
+}
+
+button{
+    margin: auto;
+}
