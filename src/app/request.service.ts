@@ -33,11 +33,15 @@ export class RequestService {
     );
   }
 
-  purchase(obj): Observable<{msg: string}> {
-    return this.http.post<{msg: string}>(`${this.base}user/purchase`, obj)
-  }
 
   getMatches(): Observable<{matches}> {
     return this.http.get<{matches}>(`${this.base}fans/getallmatches`)
+  }
+
+  purchase(param): Observable<any> {
+    const userNameSent = param
+    ? { params: new HttpParams().set("username", param) }
+    : {};
+    return this.http.post<{any}>(`${this.base}fans/addreservation`, userNameSent);
   }
 }
