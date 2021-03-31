@@ -12,6 +12,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
+import {CreateMatchComponent} from './create-match/create-match.component'
 import { ManagerComponent } from './manager/manager.component';
 import { CustomerComponent } from './customer/customer.component';
 import { AdminApproveComponent } from './admin/adminApprove.component';
@@ -20,6 +21,7 @@ import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { AddTokenInterceptor } from './add-token.interceptor';
+import { EditMatchComponent } from './edit-match/edit-match.component';
 
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
                               // {path: 'images', component: SearchResultsImagesComponent},
                             // ]
                         },
+                        { path :'create-match', component: CreateMatchComponent},
+                        {path :'edit-match', component: EditMatchComponent},
                         {path:'customer' , component: CustomerComponent},
                         {path:'admin/approve' , component: AdminApproveComponent},
                         {path:'admin/deleteAccount' , component: DeleteAccountComponent}
@@ -43,11 +47,13 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     HomePageComponent,
     LoginComponent,
     ManagerComponent,
+    CreateMatchComponent,
     CustomerComponent,
     AdminApproveComponent,
     SignupComponent,
     NavbarComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    EditMatchComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     HttpClientModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
     AdminService,

@@ -1,0 +1,101 @@
+<div id="background">
+    <div id="container">
+        <h3 style ="text-align:center"> Edit match event</h3>
+        <form style="margin: 10%;" (ngSubmit)="product1.valid && product.valid && submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue)" #form="ngForm">
+            <div class="form-group">
+                <label style="margin: 2px;" for="Stadium"> Match </label>
+                <div class="form-group">
+                    <!-- DropDownList -->
+                    <select class="custom-select" name="product1" [(ngModel)]="choosenMatch" #product1="ngModel"
+                      [ngClass]="{ 'is-invalid': form.submitted && product1.invalid }" required>
+                      <option value="" class="text-primary font-weight-bolder">
+                        --- Select Match ---
+                      </option>
+                      <option *ngFor="let match of matches" [value]="match">
+                        {{match}}
+                      </option>
+                    </select>
+
+                    <!-- Required Validation Message -->
+                    <div *ngIf="form.submitted && product1.invalid" class="text-danger">
+                      <h6 *ngIf="product1.errors.required">Product is Required</h6>
+                    </div>
+                  </div>
+            </div>
+            <!-- Home team name -->
+            <div id="form-group">
+                <label for="homeTeam">Home Team Name </label>
+                <input 
+                required 
+                ngModel name="homeTeam" #homeTeam="ngModel"  
+                id="homeTeam" type="text" class="form-control" #homeTeamValue>
+            </div>
+            <!-- Away team name -->
+            <div class="form-group">
+                <label for="awayTeam">Away Team Name </label>
+                <input 
+                required 
+                ngModel name="awayTeam" #awayTeam="ngModel" 
+                id="awayTeam" type="text" class="form-control" #awayTeamValue>
+            </div>
+            <!-- Date -->
+            <div class="form-group">
+                <label for="date"> Match Date  </label>
+                <div style="margin: 2px;">
+                    <input matInput [matDatepicker]="picker" required ngModel name="date" #date="ngModel"  #dateValue>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+            </div>
+            <!-- Stadium name -->
+            <div class="form-group">
+                <label style="margin: 2px;" for="Stadium"> Stadium </label>
+                <div class="form-group">
+                    <!-- DropDownList -->
+                    <select class="custom-select" name="product" [(ngModel)]="ddlProduct" #product="ngModel"
+                      [ngClass]="{ 'is-invalid': form.submitted && product.invalid }" required>
+                      <option value="" class="text-primary font-weight-bolder">
+                        --- Select Stadium ---
+                      </option>
+                      <option *ngFor="let stadium of stadiums" [value]="stadium">
+                        {{stadium}}
+                      </option>
+                    </select>
+
+                    <!-- Required Validation Message -->
+                    <div *ngIf="form.submitted && product.invalid" class="text-danger">
+                      <h6 *ngIf="product.errors.required">Product is Required</h6>
+                    </div>
+                  </div>
+            </div>
+            <!-- Main Refree name -->
+            <div class="form-group">
+                <label for="mainRefree">Mian Refree Name </label>
+                <input 
+                required 
+                ngModel name="mainRefree" #mainRefree="ngModel" 
+                id="mainRefree" type="text" class="form-control" #mainRefreeValue>
+            </div>
+            <!-- Lines man 1 name -->
+            <div class="form-group">
+                <label for="lines1Man">Lines Man 1 Name </label>
+                <input 
+                required 
+                ngModel name="lines1Man" #lines1Man="ngModel" 
+                id="lines1Man" type="text" class="form-control" #lines1ManValue>
+            </div>
+            <!-- Lines man 2 name -->
+            <div class="form-group">
+                <label for="lines2Man">Lines Man 2 Name </label>
+                <input 
+                required 
+                ngModel name="lines2Man" #lines2Man="ngModel" 
+                id="lines2Man" type="text" class="form-control" #lines2ManValue>
+            </div>
+            <div class="form-group" style="height: 8px;">
+                <button   class="btn btn-primary" > 
+                Submit </button>
+            </div>
+        </form>
+    </div>
+</div>
