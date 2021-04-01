@@ -97,7 +97,11 @@ export class HomePageComponent implements OnInit {
   }
 
   purchase(match): void{
-    this.req.purchase({credit: this.payForm.value, match, seats: this.getSeatsNumbers(match)}).subscribe( res => {
+    let seats = []
+    this.getSeatsNumbers(match).forEach( el => {
+      seats.push({seat_row: Math.floor(el / this.matches[match].seats.length) , seat_col: el %  this.matches[match].seats.length})
+    });
+    this.req.purchase({credit: this.payForm.value, match: this.matches[match].id, seats}).subscribe( res => {
         if(res.msg == "successful"){
           this.taken[match] = false;
           this.credit[match] = false;
