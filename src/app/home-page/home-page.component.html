@@ -21,7 +21,7 @@
             </div>
         </div>
         <p style="text-align: center;">
-            {{match?.match_venue + " Stadium"}}
+            {{match?.stadium + " Stadium"}}
         </p>
         <div class="reserve" *ngIf="visiblity[m]">
             <div class="step1" *ngIf="!visiblity2[m]">
@@ -68,7 +68,7 @@
                 </form>
                     <div style="float:right">
                     <button class="btn btn-primary" style="margin: 20px;" (click)="back(m)"> Back</button>
-                    <button class="btn btn-primary" style="margin: 20px;" (purchase)="purchase(m)"> Purchase</button>
+                    <button class="btn btn-primary" style="margin: 20px;" (click)="purchase(m)"> Purchase</button>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   forms: FormGroup[] = new Array<FormGroup>(3);
   currentForm: number = 0;
   gender: Boolean = true;
-  type: Boolean = true;
+  type: Boolean = false;
   minDate = new Date(1920, 1);
   maxDate = new Date(2020, 1);
   txt: String = "Next"

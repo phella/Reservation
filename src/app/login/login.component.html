@@ -67,8 +67,8 @@
             </div>
             <div class="form-group">
                 <div class="btn-group" role="group" aria-label="Type">
-                    <button type="button" class="btn btn-primary" (click)="setType(true)" [ngClass]="{'btn-primary': type === true, 'btn-default': type === false }">Fan</button>
-                    <button type="button" class="btn btn-default" (click)="setType(false)" [ngClass]="{'btn-primary': type === false, 'btn-default': type === true }">Manager</button>
+                    <button type="button" class="btn btn-primary" (click)="setType(false)" [ngClass]="{'btn-primary': type === false, 'btn-default': type === true }">Fan</button>
+                    <button type="button" class="btn btn-default" (click)="setType(true)" [ngClass]="{'btn-primary': type === true, 'btn-default': type === false }">Manager</button>
                 </div>
             </div>
         </form>
