@@ -10,6 +10,8 @@ import { Observable } from "rxjs";
 export class RequestService {
 
   base: String = "http://localhost:3000/"
+  userID: String;
+
   constructor(private http: HttpClient) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
@@ -25,10 +27,21 @@ export class RequestService {
   }
 
   login(user): Observable<{Boolean}> {
-    return this.http.post<{Boolean}>(`${this.base}users/signin`, user)
+    const res = this.http.post<{Boolean}>(`${this.base}users/signin`, user);
+    console.log(res)
+    // this.userID = res['user']._id;
+    return res;
   }
 
   purchase(obj): Observable<{msg: string}> {
     return this.http.post<{msg: string}>(`${this.base}user/purchase`, obj)
+  }
+
+  addStadium(obj): Observable<{msg: string}> {
+    return this.http.post<{msg: string}>(`${this.base}manager/stadium`, obj)
+  }
+
+  getUserData(): Observable<{Boolean}> {
+    return this.http.get<{Boolean}>(`${this.base}users/getdata/${this.userID}`)
   }
 }

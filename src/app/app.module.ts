@@ -16,7 +16,8 @@ import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { AddStadiumComponent } from './add-stadium/add-stadium.component';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
                         { path: 'signup', component: LoginComponent},
@@ -28,6 +29,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
                               // {path: 'images', component: SearchResultsImagesComponent},
                             // ]
                         },
+                        {path:'addStadium', component: AddStadiumComponent},
+                        {path: 'account', component: AccountComponent},
                         {path:'customer' , component: CustomerComponent},
                         {path:'admin' , component: AdminComponent}
                       ]; 
@@ -41,7 +44,9 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     CustomerComponent,
     AdminComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddStadiumComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
