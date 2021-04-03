@@ -13,6 +13,8 @@ import { Reservation } from './models/reservation';
 export class RequestService {
 
   base: String = "http://localhost:3000/"
+  userID: String;
+
   constructor(private http: HttpClient) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
@@ -51,5 +53,11 @@ export class RequestService {
     return this.http.post<{any}>(`${this.base}fans/addreservation`, reservations);
   }
 
+  addStadium(obj): Observable<{msg: string}> {
+    return this.http.post<{msg: string}>(`${this.base}manager/stadium`, obj)
+  }
 
+  getUserData(): Observable<{Boolean}> {
+    return this.http.get<{Boolean}>(`${this.base}users/getdata/${this.userID}`)
+  }
 }
