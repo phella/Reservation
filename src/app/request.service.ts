@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Match } from './models/match';
+import { Reservation } from './models/reservation';
 
 
 
@@ -34,11 +35,21 @@ export class RequestService {
   }
 
 
-  getMatches(): Observable<{matches}> {
-    return this.http.get<{matches}>(`${this.base}fans/getallmatches`)
+  getMatches(): Observable<Match[]> {
+    return this.http.get<Match[]>(`${this.base}fans/getallmatches`)
   }
+
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.base}fans/getallreservations`);
+  }
+
+  cancelReservation(id): Observable<any> {
+    return this.http.delete<any>(`${this.base}fans/cancelreservation`, id);
+  } 
 
   purchase(reservations): Observable<any> {
     return this.http.post<{any}>(`${this.base}fans/addreservation`, reservations);
   }
+
+
 }
