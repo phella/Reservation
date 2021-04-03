@@ -1,4 +1,4 @@
-<div class="flex-container">
+ <div class="flex-container" *ngIf="type">
     <div class="flex-item" [ngClass]="{'active': true}">
       <a href="#" routerLink="/">Matches</a>
     </div>
@@ -7,5 +7,17 @@
     </div>
     <div class="flex-item">
       <a href="#" routerLink="/account">Account</a>
+    </div>
+  </div>
+
+  <div class="flex-container" *ngIf="!type">
+    <div class="flex-item" [ngClass]="{'active': true}">
+      <a routerLink="/admin/approve">Approve Accounts</a>
+    </div>
+    <div class="flex-item">
+      <a  routerLink="/admin/deleteAccount">Delete Accounts</a>   
+    </div>
+    <div class="flex-item">
+      <a style="cursor: pointer;" (click)="logout()">Log out</a>   
     </div>
   </div>

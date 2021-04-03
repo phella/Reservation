@@ -60,4 +60,16 @@ export class RequestService {
   getUserData(): Observable<{Boolean}> {
     return this.http.get<{Boolean}>(`${this.base}users/getdata/${this.userID}`)
   }
+
+  loginadmin(user): Observable<any> {
+    return this.http.post<any>(`${this.base}adminstrator/signin`, user).pipe(
+      map(res => res),
+      map(err => err)
+    );
+  }
+
+  adminlogout(): Observable<any> {
+    return this.http.post<any>(`${this.base}/adminstrator/logout`, {});
+  }
+
 }

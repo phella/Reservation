@@ -29,14 +29,9 @@ import { ReservationsComponent } from './reservations/reservations.component';
 
 const routes: Routes = [{ path: '', component: HomePageComponent },
                         { path: 'signup', component: LoginComponent},
-                        { path: 'login', component: SignupComponent},
+                        { path: 'login/:id', component: SignupComponent},
                         { path: 'home', component: HomePageComponent},
-                        { path: 'manager', component: ManagerComponent,
-                            // children: [
-                              // {path: 'all', component: SearchResultsTextComponent},
-                              // {path: 'images', component: SearchResultsImagesComponent},
-                            // ]
-                        },
+                        { path: 'manager', component: ManagerComponent},
                         {path:'addStadium', component: AddStadiumComponent},
                         {path: 'account', component: AccountComponent},
                         { path :'create-match', component: CreateMatchComponent},

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   forms: FormGroup[] = new Array<FormGroup>(3);
   currentForm: number = 0;
-  gender: Boolean = true;
+  gender: String = "Male";
   type: Boolean = false;
   minDate = new Date(1920, 1);
   maxDate = new Date(2020, 1);
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   setGender(gender: Boolean): void {
-    this.gender = gender;
+    this.gender = (gender)?"Male":"Female";
   }
 
   setType(type: Boolean): void {
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.request.signup( Object.assign({}, this.forms[0].value, this.forms[1].value, this.forms[2].value, {role: this.type})).subscribe(res => {
         if(res)
-          this.router.navigate(['login']);
+          this.router.navigate(['login/user']);
       });
     }
     

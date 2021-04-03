@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { HttpClient } from '@angular/common/http';
 import {FormGroup , FormBuilder, Validators} from '@angular/forms';
+
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-create-match',
   templateUrl: './create-match.component.html',
@@ -13,7 +15,7 @@ export class CreateMatchComponent implements OnInit {
   title = 'Bind DropDownList';
   ddlProduct = "";
   log(x){console.log(x);}
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private router: Router) { }
 
   ngOnInit(): void {
     const headers = { };
@@ -54,6 +56,7 @@ export class CreateMatchComponent implements OnInit {
       this.http.post<any>('http://localhost:3000/manager/match', body, { headers }).subscribe(data => {
         console.log(data)
     });
+    this.router.navigate(['home']);
     }catch(error){
       console.log(error)
     }

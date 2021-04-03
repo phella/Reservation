@@ -41,8 +41,8 @@
                     <div class="form-group">
                         <label> Gender </label><br>
                         <div class="btn-group" role="group" aria-label="Gender">
-                            <button type="button" class="btn btn-primary" (click)="setGender(true)" [ngClass]="{'btn-primary': gender === true, 'btn-default': gender === false }">Male</button>
-                            <button type="button" class="btn btn-default" (click)="setGender(false)" [ngClass]="{'btn-primary': gender === false, 'btn-default': gender === true }">Female</button>
+                            <button type="button" class="btn btn-primary" (click)="setGender(true)" [ngClass]="{'btn-primary': gender === 'Male', 'btn-default': gender === 'Female' }">Male</button>
+                            <button type="button" class="btn btn-default" (click)="setGender(false)" [ngClass]="{'btn-primary': gender === 'Female', 'btn-default': gender === 'Male' }">Female</button>
                         </div>
                     </div>
                     <label> City </label><br>

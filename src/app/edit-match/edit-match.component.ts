@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-edit-match',
   templateUrl: './edit-match.component.html',
@@ -16,7 +18,7 @@ export class EditMatchComponent implements OnInit {
   ddlProduct = "";
   choosenMatch="";
   log(x){console.log(x);}
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     const headers = { };
@@ -39,15 +41,7 @@ export class EditMatchComponent implements OnInit {
   }
 
   submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue):void {
-    console.log(homeTeamValue.value)
-    console.log(awayTeamValue.value)
-    console.log(dateValue.value)
-    console.log(mainRefreeValue.value)
-    console.log(lines1ManValue.value)
-    console.log(lines2ManValue.value)
-    console.log(this.ddlProduct)
-    console.log(this.choosenMatch)
-    localStorage.getItem('token')
+    localStorage.getItem('TOKEN')
     const headers = { };
     const body = { };
     if(homeTeamValue.value.length > 0) body["home_team"]=homeTeamValue.value.toString();
@@ -62,6 +56,7 @@ export class EditMatchComponent implements OnInit {
     this.http.patch<any>('http://localhost:3000/manager/match/'+this.dict_matches[this.choosenMatch].toString(), body, { headers }).subscribe(data => {
         console.log(data)
     });
+    this.router.navigate(['home']);
   }
 
 }
