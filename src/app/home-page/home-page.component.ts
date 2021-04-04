@@ -35,7 +35,6 @@ export class HomePageComponent implements OnInit {
       this.matches.forEach( el => {
         el.date = new Date(el.date);;
       })
-      console.log(this.matches)
       this.setSeats();
 
       // UI variables
@@ -45,7 +44,6 @@ export class HomePageComponent implements OnInit {
       this.taken = new Array(this.matches.length).fill(false);
       this.credit = new Array(this.matches.length).fill(false);
 
-      console.log( typeof this.matches[0].date)
     });
 
   }

@@ -7,40 +7,30 @@
 }
 
 #container{
-    width: auto;
+    width: 500px;
     margin: auto;
-    padding: 15px;
     border-radius: 15px;
     background-color: white;
     overflow:hidden;
+}
+
+#header{
+    height: 100px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2em;
+}
+
+#title {
+    position: relative;
+    top: 30%;
+    padding: 20px;
 }
 
 button{
     float: right;
     font-size: larger;
     margin-right: 10px;
-}
-
-img {
-    animation: move 5s infinite;
-}
-    
-
-@media only screen and (max-width: 600px) {
-    #container {
-        width: 80%;
-    }
-  }
-
-@keyframes move {
-  80%, 100% {
-    opacity: 0;
-    transform: translate(200px, 0);
-  }
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
 }

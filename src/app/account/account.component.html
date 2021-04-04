@@ -1,12 +1,69 @@
-<div id="container">
-    <img src="../../assets/tazkarti.svg" style="margin:auto">
-    <h3 style="text-align: center">Account</h3>
-    <form style="margin: 10px" [formGroup]="accountForm">
-        <div class="form-group">
-            <label >Name</label>
-            <input type="text" class="form-control" formControlName="name">
+<div id="background">
+    <div id="container">
+        <div id="header">
+            <span id="title"> Account</span>
         </div>
+        <form style="margin: 10px" [formGroup]="accountForm" *ngIf="accountForm">
+            <div class="form-group">
+                <label >Username</label>
+                <input type="text" class="form-control" formControlName="username">
+            </div>
+            <div class="form-group">
+                <label >Email</label>
+                <input type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label >First Name</label>
+                <input type="text" class="form-control" formControlName="first_name">
+            </div>
+            <div class="form-group">
+                <label >Last Name</label>
+                <input type="text" class="form-control" formControlName="last_name">
+            </div>
+            <div class="form-group">
+                <label> Gender </label><br>
+                <div class="btn-group" role="group" aria-label="Gender">
+                    <button type="button" class="btn btn-primary" (click)="setGender(true)" [ngClass]="{'btn-primary': gender === 'Male', 'btn-default': gender === 'Female' }">Male</button>
+                    <button type="button" class="btn btn-default" (click)="setGender(false)" [ngClass]="{'btn-primary': gender === 'Female', 'btn-default': gender === 'Male' }">Female</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label> City </label><br>
+                <select class="form-control" formControlName="city">
+                    <option value="Cairo"> Cairo </option>
+                    <option Value="Alexandria"> Alexandria </option>
+                    <option value="Aswan"> Aswan </option>
+                    <option value="Giza"> Giza </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >Address</label>
+                <input type="text" class="form-control" formControlName="address">
+            </div>
+            <div class="form-group">
+                <label> Birth Date</label>
+                <div style="display:block">
+                    <input matInput [matDatepicker]="picker" formControlName="birthdate" #birthdate [min]="minDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                </div>
+            </div>
+            <div class="form-group">
+                <label> Old Password</label>
+                <input type="password" class="form-control" formControlName="old_password">
+            </div>
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" class="form-control" formControlName="password">
+            </div>
+            <div *ngIf="this.wrong" class="alert alert-danger" role="alert">
+                {{error_message}}
+            </div>
+            <div class="form-group" style="height: 8px;">
+                <button (click)="submit()" class="btn btn-primary" [disabled]="accountForm.invalid">Update</button>
+            </div>
 
-    </form>
-    <br>
+        </form>
+        <br>
+    </div>
 </div>

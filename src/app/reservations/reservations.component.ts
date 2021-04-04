@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Match } from '../models/match';
+import { Reservation } from '../models/reservation';
 
 @Component({
   selector: 'app-reservations',
@@ -12,9 +13,9 @@ export class ReservationsComponent implements OnInit {
   
   constructor(private request: RequestService) { }
 
-  matches: Match[];
+  matches: Reservation[];
   ngOnInit(): void {
-    this.request.getMatches().subscribe(res => 
+    this.request.getReservations().subscribe(res => 
         {this.matches = res;}
     )
   }

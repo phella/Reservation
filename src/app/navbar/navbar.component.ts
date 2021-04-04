@@ -13,10 +13,11 @@ export class NavbarComponent implements OnInit {
 
   type: Boolean = true;
   page: number = 1;
+  manager: string;
   constructor(private router: Router, private request: RequestService) { }
 
   ngOnInit(): void {
-    console.log(this.router.url);
+    this.manager = localStorage.getItem("type");
     const currenturl = this.router.url;
     if(this.router.url.substr(0, 6) === "/admin"){
       this.type = false;
@@ -44,9 +45,14 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    this.request.adminlogout().subscribe();
-    localStorage.removeItem('TOKEN');
-    this.router.navigate(['login','admin']);
+  logout(admin): void {
+    if( admin ) {
+      this.request.adminlogout().subscribe();
+      this.router.navigate(['login','admin']);
+    } else {
+      this.request.logout().subscribe();
+      this.router.navigate(['login','user']);
+    }
+    localStorage.clear();
   }
 }

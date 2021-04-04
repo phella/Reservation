@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Match } from './models/match';
 import { Reservation } from './models/reservation';
+import { IfStmt } from '@angular/compiler';
 
 
 
@@ -42,7 +43,9 @@ export class RequestService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.base}fans/getreservations`);
+    return this.http.get<Reservation[]>(`${this.base}fans/getreservations`).pipe(
+      catchError(this.handleError)
+      );
   }
 
   cancelReservation(id): Observable<any> {
@@ -58,7 +61,11 @@ export class RequestService {
   }
 
   getUserData(): Observable<{Boolean}> {
-    return this.http.get<{Boolean}>(`${this.base}users/getdata/${this.userID}`)
+    return this.http.get<{Boolean}>(`${this.base}users/getUserData`)
+  }
+
+  updateUserData(obj): Observable<{Boolean}> {
+    return this.http.post<{Boolean}>(`${this.base}users/updateUserData`, obj)
   }
 
   loginadmin(user): Observable<any> {
@@ -72,4 +79,17 @@ export class RequestService {
     return this.http.post<any>(`${this.base}/adminstrator/logout`, {});
   }
 
+  logout(): Observable<any> {
+    return this.http.post<any>(`${this.base}/user/logout`, {});
+  }
+
+
+  private handleError(error: HttpErrorResponse){
+    if(error.status === 401) // unauthorized
+      localStorage.clear();
+
+    return throwError("unauthorized");
+  }
+
+  
 }
