@@ -1,2 +1,33 @@
 <app-navbar></app-navbar>
-hiiiiiii
+<div class="back">
+    <div *ngFor="let match of matches; let m = index;" class="card" >
+        <p class="date">
+            {{days[match?.date.getDay()] + ",  " + match?.date.getDate() + "/" + match?.date.getMonth() 
+                + "/" + match?.date.getFullYear() + ", " + match?.date.getHours() + ":" + match?.date.getMinutes()}}
+        </p>
+        <div style="display: flex; height: 150px;">
+            <div class="team">
+                <img src="../../assets/AlAhly.png">
+                <h5>{{match.home_team}}</h5>
+            </div>
+            <div style="width: 20%; text-align: center;">
+                <p style="top: 50px;position: relative;">
+                    vs
+                </p>
+            </div>
+            <div class="team">
+                <img src="../../assets/AlZamalek.png">
+                <h5> {{match.away_team}}</h5>
+            </div>
+        </div>
+        <p style="text-align: center;">
+            {{match?.stadium + " Stadium"}}
+        </p>
+        <div>
+            <span >
+                <b>Main Referee </b> <span style="color:green"> {{match?.main_referee}} </span>
+            </span>
+            <span style="float:right">
+                <b> Line Man </b> <span style="color:green">{{match?.line_man1}}, {{match?.line_man2}} </span>
+            </span>
+        </div>

@@ -42,7 +42,7 @@ export class RequestService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.base}fans/getallreservations`);
+    return this.http.get<Reservation[]>(`${this.base}fans/getreservations`);
   }
 
   cancelReservation(id): Observable<any> {
