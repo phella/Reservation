@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
       this.request.loginadmin(this.loginForm.value).subscribe( 
         res => {
           localStorage.setItem('TOKEN', res.token);
+          localStorage.setItem('admin', 'admin');
           this.router.navigate(['admin/approve']);
         },
         err => {
