@@ -1,7 +1,7 @@
 import { AdminService } from './admin/admin.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule,Routes } from '@angular/router';
+import { NgModule, Injectable } from '@angular/core';
+import { RouterModule,Routes, RouterStateSnapshot, CanActivate, Router, ActivatedRouteSnapshot, UrlTree } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -25,21 +25,66 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
 import { AddTokenInterceptor } from './add-token.interceptor';
 import { EditMatchComponent } from './edit-match/edit-match.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { Observable } from 'rxjs';
 
 
-const routes: Routes = [{ path: '', component: HomePageComponent },
-                        { path: 'signup', component: LoginComponent},
-                        { path: 'login/:id', component: SignupComponent},
-                        { path: 'home', component: HomePageComponent},
-                        { path: 'manager', component: ManagerComponent},
-                        {path:'addStadium', component: AddStadiumComponent},
-                        {path: 'account', component: AccountComponent},
-                        { path :'create-match', component: CreateMatchComponent},
-                        {path :'edit-match', component: EditMatchComponent},
+@Injectable()
+export class Authorized implements CanActivate {
+  user_routes = ['/account', '/reservations'];
+  admin_routes = ['/admin/approve', '/admin/deleteAccount'];
+  manager_routes = [ '/manager', '/addstadium', '/create-match', '/edit-match']; 
+  constructor(private router: Router){};
+  
+   canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
+    var token = localStorage.getItem('TOKEN');
+    if(token === null)
+     {
+       window.alert("Unauthorized user, please log in first!");
+       this.router.navigate(['/login/user']);
+       return false;
+      }
+    const type = localStorage.getItem('type');
+    const admin = localStorage.getItem('admin');
+    let url = state.url;
+    
+    console.log(url);
+    if(admin){
+      if(this.admin_routes.includes(url)) return true;
+      else return false;
+    }
+    
+    if(type == "true"){ // Manager
+      if(this.manager_routes.includes(url)) return true;
+      else return false;
+    }
+    
+    // User
+    if(this.user_routes.includes(url)) return true;
+      else return false;
+    
+  }
+   
+}
+
+
+
+
+const routes: Routes = [{path: 'signup', component: LoginComponent},
+                        {path: 'login/:id', component: SignupComponent},
+                        {path: 'home', component: HomePageComponent},
+                        {path: 'manager', component: ManagerComponent, canActivate: [Authorized]},
+                        {path:'addStadium', component: AddStadiumComponent, canActivate: [Authorized]},
+                        {path: 'account', component: AccountComponent, canActivate: [Authorized]},
+                        {path :'create-match', component: CreateMatchComponent, canActivate: [Authorized]},
+                        {path :'edit-match', component: EditMatchComponent, canActivate: [Authorized]},
                         {path:'customer' , component: CustomerComponent},
-                        {path:'admin/approve' , component: AdminApproveComponent},
-                        {path:'admin/deleteAccount' , component: DeleteAccountComponent},
-                        {path:'reservations', component: ReservationsComponent}
+                        {path:'admin/approve' , component: AdminApproveComponent, canActivate: [Authorized]},
+                        {path:'admin/deleteAccount' , component: DeleteAccountComponent, canActivate: [Authorized]},
+                        {path:'reservations', component: ReservationsComponent, canActivate: [Authorized]},
+                        {path: '*', component: HomePageComponent }
                       ]; 
 
 @NgModule({
@@ -56,7 +101,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     AddStadiumComponent,
     AccountComponent,
     DeleteAccountComponent,
-    EditMatchComponent
+    EditMatchComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +116,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
   ],
   providers: [
     AdminService,
+    Authorized,
     {provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

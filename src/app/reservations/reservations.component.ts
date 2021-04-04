@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../request.service';
+import { Match } from '../models/match';
+import { Reservation } from '../models/reservation';
 
 @Component({
   selector: 'app-reservations',
@@ -6,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservations.component.css']
 })
 export class ReservationsComponent implements OnInit {
+  days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  
+  constructor(private request: RequestService) { }
 
-  constructor() { }
-
+  matches: Reservation[];
   ngOnInit(): void {
+    this.request.getReservations().subscribe(res => 
+        {this.matches = res;}
+    )
   }
 
 }

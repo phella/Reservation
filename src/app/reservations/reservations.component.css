@@ -1,0 +1,67 @@
+app-navbar{
+    position: fixed;
+    width:100%;
+    top:0px;
+    z-index: 5;
+}
+
+.back {
+    position: relative;
+    top: 70px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #f8f9fa;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card {
+    background-color: white;
+    margin:30px;
+    height: auto; /* was 250 px */ 
+    width: 60%;
+    box-shadow: 0px 5px 26px 0px rgba(0, 0, 0, 0.22), 0px 20px 28px 0px rgba(0, 0, 0, 0.30);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.date {
+    color: #70757a;
+}
+
+.team {
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+}
+
+.seats {
+    height: 150px;
+    overflow: scroll;
+}
+
+.seat {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: white;
+    background-color: grey;
+    margin: 3px;
+    text-align: center;
+    border-radius: 25%;
+}
+
+@media only screen and (max-width: 600px) {
+    .date {
+        font-size: 0.9em;
+    }
+    img {
+        width: 80px;
+    }
+    h5 {
+        font-size: 1em;
+    }
+}
