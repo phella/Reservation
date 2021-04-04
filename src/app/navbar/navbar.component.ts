@@ -13,10 +13,11 @@ export class NavbarComponent implements OnInit {
 
   type: Boolean = true;
   page: number = 1;
+  manager: string;
   constructor(private router: Router, private request: RequestService) { }
 
   ngOnInit(): void {
-    console.log(this.router.url);
+    this.manager = localStorage.getItem("type");
     const currenturl = this.router.url;
     if(this.router.url.substr(0, 6) === "/admin"){
       this.type = false;
