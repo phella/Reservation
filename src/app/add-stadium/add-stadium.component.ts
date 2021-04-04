@@ -13,6 +13,7 @@ import { RequestService } from '../request.service';
 export class AddStadiumComponent implements OnInit {
   addStadiumForm: FormGroup;
   wrong: Boolean;
+  error_message: String;
 
   constructor(private fb: FormBuilder, private request: RequestService, private router: Router) { }
 
@@ -21,22 +22,18 @@ export class AddStadiumComponent implements OnInit {
       name : ['', Validators.required],
       VIP_area_rows : ['', Validators.required],
       VIP_area_seats_per_row : ['', Validators.required],
-      normal_area_rows : ['', Validators.required],
-      seats_per_row : ['', Validators.required]
     });
   }
 
   submit():void {
-    console.log(this.addStadiumForm.value);
     this.request.addStadium(this.addStadiumForm.value).subscribe( res => {
-      if(res){
         alert("Stadium Added Successfully.");
         this.router.navigate(['home']);
-
-      }
-      else
+      },
+      err => {
         this.wrong = true;
-    });
+        this.error_message = err.error.message;
+      });
   }
 
 }

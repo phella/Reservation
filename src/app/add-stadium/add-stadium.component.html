@@ -1,7 +1,8 @@
 <div id="background">
     <div id="container">
-        <img src="../../assets/tazkarti.svg" style="margin:auto">
-        <h3 style="text-align: center">Add Stadium</h3>
+        <div id="header">
+            <span id="title"> Add Stadium</span>
+        </div>
         <form style="margin: 10px" [formGroup]="addStadiumForm">
             <div class="form-group">
                 <label >Name</label>
@@ -14,22 +15,14 @@
             </div>
 
             <div class="form-group">
-                <label >VIP area seats per row</label>
+                <label >Seats per row</label>
                 <input type="number" class="form-control" formControlName="VIP_area_seats_per_row">
             </div>
-
-            <div class="form-group">
-                <label >Normal area rows</label>
-                <input type="number" class="form-control" formControlName="normal_area_rows">
+            <div *ngIf="this.wrong" class="alert alert-danger" role="alert">
+                {{error_message}}
             </div>
-
-            <div class="form-group">
-                <label >Normal area seats per row</label>
-                <input type="number" class="form-control" formControlName="seats_per_row">
-            </div>
-
             <div class="form-group" style="height: 8px;">
-                <button (click)="submit()" class="btn btn-primary">Submit</button>
+                <button (click)="submit()" class="btn btn-primary" [disabled]="addStadiumForm.invalid">Submit</button>
             </div>
         </form>
         <br>

@@ -58,7 +58,11 @@ export class RequestService {
   }
 
   getUserData(): Observable<{Boolean}> {
-    return this.http.get<{Boolean}>(`${this.base}users/getdata/${this.userID}`)
+    return this.http.get<{Boolean}>(`${this.base}users/getUserData`)
+  }
+
+  updateUserData(obj): Observable<{Boolean}> {
+    return this.http.post<{Boolean}>(`${this.base}users/updateUserData`, obj)
   }
 
   loginadmin(user): Observable<any> {
