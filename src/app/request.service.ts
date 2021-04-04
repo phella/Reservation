@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Match } from './models/match';
 import { Reservation } from './models/reservation';
@@ -76,8 +76,12 @@ export class RequestService {
   }
 
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse){
     if(error.status === 401) // unauthorized
-      localStorage.removeItem('TOKEN');
+      localStorage.clear();
+
+    return throwError("unauthorized");
   }
+
+  
 }
