@@ -31,7 +31,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class Authorized implements CanActivate {
   user_routes = ['/account', '/reservations'];
-  admin_routes = ['/admin/approve', '/admin/deleteaccount'];
+  admin_routes = ['/admin/approve', '/admin/deleteAccount'];
   manager_routes = [ '/manager', '/addstadium', '/create-match', '/edit-match']; 
   constructor(private router: Router){};
   

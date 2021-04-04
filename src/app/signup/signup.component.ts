@@ -48,6 +48,7 @@ export class SignupComponent implements OnInit {
         res => {
           localStorage.setItem('TOKEN', res.token);
           localStorage.setItem('type', res.user.role);
+          localStorage.removeItem("admin");
           this.router.navigate(['home']);
         },
         err => {

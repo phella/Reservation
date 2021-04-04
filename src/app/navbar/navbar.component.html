@@ -12,10 +12,10 @@
 
   <div class="flex-container" *ngIf="!type">
     <div class="flex-item" [ngClass]="{'active': page === 1}">
-      <p routerLink="/admin/approve">Approve Accounts</p>
+      <p routerLink="/admin/approve" >Approve Accounts</p>
     </div>
     <div class="flex-item" [ngClass]="{'active': page === 2}">
-      <p  routerLink="/admin/deleteAccount">Delete Accounts</p>   
+      <p  routerLink="/admin/deleteAccount" >Delete Accounts</p>   
     </div>
     <div class="flex-item" [ngClass]="{'active': page === 3}">
       <p style="cursor: pointer;" (click)="logout()">Log out</p>   
