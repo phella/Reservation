@@ -31,8 +31,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class Authorized implements CanActivate {
   user_routes = ['/account', '/reservations'];
-  manager_routes = ['/admin/approve', '/admin/deleteaccount'];
-  admin_routes = [ '/manager', '/addstadium', '/create-match', '/edit-match']; 
+  admin_routes = ['/admin/approve', '/admin/deleteaccount'];
+  manager_routes = [ '/manager', '/addstadium', '/create-match', '/edit-match']; 
   constructor(private router: Router){};
   
    canActivate(
@@ -50,6 +50,7 @@ export class Authorized implements CanActivate {
     const admin = localStorage.getItem('admin');
     let url = state.url;
     
+    console.log(url);
     if(admin){
       if(this.admin_routes.includes(url)) return true;
       else return false;

@@ -34,6 +34,7 @@ export class SignupComponent implements OnInit {
         res => {
           localStorage.setItem('TOKEN', res.token);
           localStorage.setItem('admin', 'admin');
+          localStorage.removeItem("type");
           this.router.navigate(['admin/approve']);
         },
         err => {
