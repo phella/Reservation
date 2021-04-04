@@ -76,11 +76,11 @@ export class RequestService {
   }
 
   adminlogout(): Observable<any> {
-    return this.http.post<any>(`${this.base}/adminstrator/logout`, {});
+    return this.http.post<any>(`${this.base}adminstrator/logout`, {});
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(`${this.base}/user/logout`, {});
+    return this.http.post<any>(`${this.base}users/logout`, {});
   }
 
 
