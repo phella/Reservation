@@ -48,20 +48,20 @@ export class Authorized implements CanActivate {
       }
     const type = localStorage.getItem('type');
     const admin = localStorage.getItem('admin');
-    let rout = this.router.url;
+    let url = state.url;
     
     if(admin){
-      if(this.admin_routes.includes(rout)) return true;
+      if(this.admin_routes.includes(url)) return true;
       else return false;
     }
     
-    if(type){ // Manager
-      if(this.manager_routes.includes(rout)) return true;
+    if(type == "true"){ // Manager
+      if(this.manager_routes.includes(url)) return true;
       else return false;
     }
     
     // User
-    if(this.user_routes.includes(rout)) return true;
+    if(this.user_routes.includes(url)) return true;
       else return false;
     
   }
@@ -115,6 +115,7 @@ const routes: Routes = [{path: 'signup', component: LoginComponent},
   ],
   providers: [
     AdminService,
+    Authorized,
     {provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
