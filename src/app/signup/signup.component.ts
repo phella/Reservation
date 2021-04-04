@@ -19,6 +19,8 @@ export class SignupComponent implements OnInit {
   constructor(private fb: FormBuilder, private request: RequestService, private router:Router,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("TOkEN") == null)
+      this.router.navigate(['home']);
     this.type = this.route.snapshot.params['id'];
     this.loginForm = this.fb.group({
       email : ['', Validators.required],
@@ -43,6 +45,7 @@ export class SignupComponent implements OnInit {
       this.request.login(this.loginForm.value).subscribe( 
         res => {
           localStorage.setItem('TOKEN', res.token);
+          localStorage.setItem('type', res.user.role);
           this.router.navigate(['home']);
         },
         err => {

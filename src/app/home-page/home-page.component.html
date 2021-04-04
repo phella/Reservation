@@ -8,7 +8,7 @@
         <div style="display: flex; height: 150px;" (click)="toggleView(m)">
             <div class="team">
                 <img src="../../assets/AlAhly.png">
-                <h5> Al Ahly </h5>
+                <h5>{{match.home_team}}</h5>
             </div>
             <div style="width: 20%; text-align: center;">
                 <p style="top: 50px;position: relative;">
@@ -17,7 +17,7 @@
             </div>
             <div class="team">
                 <img src="../../assets/AlZamalek.png">
-                <h5> Al Zamalek</h5>
+                <h5> {{match.away_team}}</h5>
             </div>
         </div>
         <p style="text-align: center;">
