@@ -44,9 +44,14 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    this.request.adminlogout().subscribe();
-    localStorage.removeItem('TOKEN');
-    this.router.navigate(['login','admin']);
+  logout(admin): void {
+    if( admin ) {
+      this.request.adminlogout().subscribe();
+      this.router.navigate(['login','admin']);
+    } else {
+      this.request.logout().subscribe();
+      this.router.navigate(['login','user']);
+    }
+    localStorage.clear();
   }
 }

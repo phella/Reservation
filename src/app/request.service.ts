@@ -75,6 +75,10 @@ export class RequestService {
     return this.http.post<any>(`${this.base}/adminstrator/logout`, {});
   }
 
+  logout(): Observable<any> {
+    return this.http.post<any>(`${this.base}/user/logout`, {});
+  }
+
 
   private handleError(error: HttpErrorResponse){
     if(error.status === 401) // unauthorized
