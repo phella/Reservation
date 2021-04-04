@@ -23,6 +23,14 @@
         <p style="text-align: center;">
             {{match?.stadium + " Stadium"}}
         </p>
+        <div>
+            <span >
+                <b>Main Referee </b> <span style="color:green"> {{match?.main_referee}} </span>
+            </span>
+            <span style="float:right">
+                <b> Line Man </b> <span style="color:green">{{match?.line_man1}}, {{match?.line_man2}} </span>
+            </span>
+        </div>
         <div class="reserve" *ngIf="visiblity[m]">
             <div class="step1" *ngIf="!visiblity2[m]">
                 <div class="seats">
