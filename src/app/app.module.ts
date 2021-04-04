@@ -27,19 +27,19 @@ import { EditMatchComponent } from './edit-match/edit-match.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 
 
-const routes: Routes = [{ path: '', component: HomePageComponent },
-                        { path: 'signup', component: LoginComponent},
-                        { path: 'login/:id', component: SignupComponent},
-                        { path: 'home', component: HomePageComponent},
-                        { path: 'manager', component: ManagerComponent},
+const routes: Routes = [{path: 'signup', component: LoginComponent},
+                        {path: 'login/:id', component: SignupComponent},
+                        {path: 'home', component: HomePageComponent},
+                        {path: 'manager', component: ManagerComponent},
                         {path:'addStadium', component: AddStadiumComponent},
                         {path: 'account', component: AccountComponent},
-                        { path :'create-match', component: CreateMatchComponent},
+                        {path :'create-match', component: CreateMatchComponent},
                         {path :'edit-match', component: EditMatchComponent},
                         {path:'customer' , component: CustomerComponent},
                         {path:'admin/approve' , component: AdminApproveComponent},
                         {path:'admin/deleteAccount' , component: DeleteAccountComponent},
-                        {path:'reservations', component: ReservationsComponent}
+                        {path:'reservations', component: ReservationsComponent},
+                        {path: '*', component: HomePageComponent }
                       ]; 
 
 @NgModule({
@@ -56,7 +56,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent },
     AddStadiumComponent,
     AccountComponent,
     DeleteAccountComponent,
-    EditMatchComponent
+    EditMatchComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,

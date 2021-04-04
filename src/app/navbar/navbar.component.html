@@ -1,23 +1,23 @@
  <div class="flex-container" *ngIf="type">
-    <div class="flex-item" [ngClass]="{'active': true}">
-      <a href="#" routerLink="/">Matches</a>
+    <div class="flex-item" [ngClass]="{'active': page === 1}">
+      <p  routerLink="/home">Matches</p>
     </div>
-    <div class="flex-item">
-      <a href="#" routerLink="/">Reservations</a>   
+    <div class="flex-item" [ngClass]="{'active': page === 2}">
+      <p  routerLink="/reservations">Reservations</p>   
     </div>
-    <div class="flex-item">
-      <a href="#" routerLink="/account">Account</a>
+    <div class="flex-item" [ngClass]="{'active': page === 3}">
+      <p routerLink="/account">Account</p>
     </div>
   </div>
 
   <div class="flex-container" *ngIf="!type">
-    <div class="flex-item" [ngClass]="{'active': true}">
-      <a routerLink="/admin/approve">Approve Accounts</a>
+    <div class="flex-item" [ngClass]="{'active': page === 1}">
+      <p routerLink="/admin/approve">Approve Accounts</p>
     </div>
-    <div class="flex-item">
-      <a  routerLink="/admin/deleteAccount">Delete Accounts</a>   
+    <div class="flex-item" [ngClass]="{'active': page === 2}">
+      <p  routerLink="/admin/deleteAccount">Delete Accounts</p>   
     </div>
-    <div class="flex-item">
-      <a style="cursor: pointer;" (click)="logout()">Log out</a>   
+    <div class="flex-item" [ngClass]="{'active': page === 3}">
+      <p style="cursor: pointer;" (click)="logout()">Log out</p>   
     </div>
   </div>
