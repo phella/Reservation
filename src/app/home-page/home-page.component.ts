@@ -40,6 +40,7 @@ export class HomePageComponent implements OnInit {
 
       // UI variables
       this.visiblity = new Array(this.matches.length).fill(false);
+      console.log(this.matches.length)
       this.visiblity2 = new Array(this.matches.length).fill(false);
       this.taken = new Array(this.matches.length).fill(false);
       this.credit = new Array(this.matches.length).fill(false);
@@ -117,7 +118,7 @@ export class HomePageComponent implements OnInit {
   }
 
   setSeats(): void {
-    console.log(this.matches)
+    console.log(this.matches.length)
     for( let m = 0; m < this.matches.length; m++) {
       let new_temp = [];
       if(this.matches[m]) {
@@ -130,6 +131,7 @@ export class HomePageComponent implements OnInit {
           new_temp.push(row);
         }
         this.seats.push(new_temp);
+        console.log("hiii")
         console.log(this.seats);
       }
     }
