@@ -29,10 +29,13 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.socket.on("New Reservation",reservation =>{
       for(let i = 0; i < reservation.seats.length; i++){
-        let row = reservation.seats[i][0];
-        let col = reservation.seats[i][1];
+        let row = reservation.seats[i]["seat_row"];
+        let col = reservation.seats[i]["seat_col"];
+        let m = this.getMatchOrder(reservation.match);
+        this.seats[m][row][col] = 2;
       }
-    })
+    });
+
     this.currenturl = this.router.url;
     this.payForm = this.fb.group({
       credit : ['', Validators.required],
@@ -56,6 +59,13 @@ export class HomePageComponent implements OnInit {
 
   }
 
+  getMatchOrder(matchId){
+    console.log(matchId);
+    for (let i =0; i < this.matches.length; i++ ){
+      if(this.matches[i].id == matchId) return i; 
+    }
+    console.error(" Choosen Match not found");
+  }
   toggleView(index): void {
       this.visiblity[index] = !this.visiblity[index];
   }
