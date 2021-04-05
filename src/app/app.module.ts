@@ -32,7 +32,7 @@ import { Observable } from 'rxjs';
 export class Authorized implements CanActivate {
   user_routes = ['/account', '/reservations'];
   admin_routes = ['/admin/approve', '/admin/deleteAccount'];
-  manager_routes = [ '/manager', '/addstadium', '/create-match', '/edit-match']; 
+  manager_routes = [ '/manager', '/addStadium', '/create-match', '/edit-match']; 
   constructor(private router: Router){};
   
    canActivate(
