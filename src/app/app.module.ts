@@ -5,7 +5,7 @@ import { RouterModule,Routes, RouterStateSnapshot, CanActivate, Router, Activate
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io'; // sockets
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -87,6 +87,9 @@ const routes: Routes = [{path: 'signup', component: LoginComponent},
                         {path: '**', component: HomePageComponent }
                       ]; 
 
+                      
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} }; //sockets
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,6 +108,7 @@ const routes: Routes = [{path: 'signup', component: LoginComponent},
     ReservationsComponent
   ],
   imports: [
+    SocketIoModule.forRoot(config), // sockets
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
