@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Match } from './models/match';
@@ -49,7 +49,13 @@ export class RequestService {
   }
 
   cancelReservation(id): Observable<any> {
-    return this.http.delete<any>(`${this.base}fans/cancelreservation`, id);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {id},
+    };
+    return this.http.delete<any>(`${this.base}fans/cancelreservation`, options);
   } 
 
   purchase(reservations): Observable<any> {
