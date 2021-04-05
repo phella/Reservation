@@ -84,7 +84,7 @@ const routes: Routes = [{path: 'signup', component: LoginComponent},
                         {path:'admin/approve' , component: AdminApproveComponent, canActivate: [Authorized]},
                         {path:'admin/deleteAccount' , component: DeleteAccountComponent, canActivate: [Authorized]},
                         {path:'reservations', component: ReservationsComponent, canActivate: [Authorized]},
-                        {path: '*', component: HomePageComponent }
+                        {path: '**', component: HomePageComponent }
                       ]; 
 
 @NgModule({

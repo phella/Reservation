@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup , FormBuilder, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {Match} from '../models/match';
 import { RequestService } from '../request.service';
@@ -21,7 +22,8 @@ export class HomePageComponent implements OnInit {
   taken: Boolean[];
   payForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private req: RequestService) { }
+  constructor(private fb: FormBuilder, private req: RequestService, private router: Router) { 
+  }
 
   ngOnInit(): void {
     
@@ -38,6 +40,7 @@ export class HomePageComponent implements OnInit {
       this.setSeats();
 
       // UI variables
+      console.log(this.matches.length)
       this.visiblity = new Array(this.matches.length).fill(false);
       console.log(this.matches.length)
       this.visiblity2 = new Array(this.matches.length).fill(false);
@@ -101,13 +104,14 @@ export class HomePageComponent implements OnInit {
       seats.push({seat_row: Math.floor(el / this.matches[match].seats.length) , seat_col: el %  this.matches[match].seats.length})
     });
     this.req.purchase({credit: this.payForm.value, match: this.matches[match].id, seats}).subscribe( res => {
-        if(res.msg == "successful"){
+        if(res.error == undefined){
           this.taken[match] = false;
           this.credit[match] = false;
           for(let i =0 ;i< this.pending.length; i++){
             if(this.pending[i].match == match) this.pending.splice(i, 1);
           }
-        } else if(res.msg == "wrong credintials") {
+          this.router.navigate(['error'])
+        } else if(res.error == "Seat is not available") {
           this.credit[match] = true;          
         } else{
           this.taken[match] = true;
