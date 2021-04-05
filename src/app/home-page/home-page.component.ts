@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup , FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Socket } from 'ngx-socket-io'; // sockets
 import {Match} from '../models/match';
 import { RequestService } from '../request.service';
 
@@ -21,12 +21,19 @@ export class HomePageComponent implements OnInit {
   credit: Boolean[];
   taken: Boolean[];
   payForm: FormGroup;
+  currenturl: String
 
-  constructor(private fb: FormBuilder, private req: RequestService, private router: Router) { 
+  constructor(private fb: FormBuilder, private req: RequestService, private router: Router,  private socket: Socket) { 
   }
 
   ngOnInit(): void {
-    
+    this.socket.on("New Reservation",reservation =>{
+      for(let i = 0; i < reservation.seats.length; i++){
+        let row = reservation.seats[i][0];
+        let col = reservation.seats[i][1];
+      }
+    })
+    this.currenturl = this.router.url;
     this.payForm = this.fb.group({
       credit : ['', Validators.required],
       bin : ['', Validators.required]
@@ -40,9 +47,7 @@ export class HomePageComponent implements OnInit {
       this.setSeats();
 
       // UI variables
-      console.log(this.matches.length)
       this.visiblity = new Array(this.matches.length).fill(false);
-      console.log(this.matches.length)
       this.visiblity2 = new Array(this.matches.length).fill(false);
       this.taken = new Array(this.matches.length).fill(false);
       this.credit = new Array(this.matches.length).fill(false);
@@ -110,7 +115,11 @@ export class HomePageComponent implements OnInit {
           for(let i =0 ;i< this.pending.length; i++){
             if(this.pending[i].match == match) this.pending.splice(i, 1);
           }
-          this.router.navigate(['error'])
+          this.socket.removeListener("New Reservation")
+          if(this.currenturl == '/home')
+            this.router.navigate([''])
+          else
+            this.router.navigate(['/home'])
         } else if(res.error == "Seat is not available") {
           this.credit[match] = true;          
         } else{
@@ -120,7 +129,6 @@ export class HomePageComponent implements OnInit {
   }
 
   setSeats(): void {
-    console.log(this.matches.length)
     for( let m = 0; m < this.matches.length; m++) {
       let new_temp = [];
       if(this.matches[m]) {
@@ -133,8 +141,6 @@ export class HomePageComponent implements OnInit {
           new_temp.push(row);
         }
         this.seats.push(new_temp);
-        console.log("hiii")
-        console.log(this.seats);
       }
     }
   }
