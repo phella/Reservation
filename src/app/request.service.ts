@@ -5,7 +5,7 @@ import { catchError, map } from "rxjs/operators";
 import { Match } from './models/match';
 import { Reservation } from './models/reservation';
 import { IfStmt } from '@angular/compiler';
-
+import { Socket } from 'ngx-socket-io'; // sockets
 
 
 @Injectable({
@@ -16,7 +16,7 @@ export class RequestService {
   base: String = "http://localhost:3000/"
   userID: String;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socket: Socket) { }
 
   checkUser(userName: string): Observable<{Boolean}> {
     const userNameSent = userName
