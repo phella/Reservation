@@ -13,10 +13,18 @@ export class ReservationsComponent implements OnInit {
   
   constructor(private request: RequestService) { }
 
-  matches: Reservation[];
+  matches: Match[] = [];
   ngOnInit(): void {
     this.request.getReservations().subscribe(res => 
-        {this.matches = res;}
+        {
+          for(let i=0;i<res.length;i++){
+            this.matches.push(res[i]["match"]);  
+          }
+          this.matches.forEach( el => {
+            el.date = new Date(el.date);;
+          })
+          console.log(this.matches)
+        }
     )
   }
 
