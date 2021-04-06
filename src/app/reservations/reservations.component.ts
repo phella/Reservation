@@ -31,10 +31,13 @@ export class ReservationsComponent implements OnInit {
   cancel(reservation) {
     this.request.cancelReservation(reservation._id).subscribe( res => {
       if(res.error == undefined){
+        console.log(reservation._id)
+        console.log(this.reservations)
         for(let i = 0; i < this.reservations.length; i++) {
-          if(this.reservations[i]._id == reservation._id)
+          if(this.reservations[i]._id == reservation._id){
             this.reservations.splice(i, 1);
             return;
+          }
         }
       }
     });

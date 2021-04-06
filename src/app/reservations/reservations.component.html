@@ -31,8 +31,10 @@
                 <b> Line Man </b> <span style="color:green">{{reservation?.match?.line_man1}}, {{reservation?.match?.line_man2}} </span>
             </span>
         </div>
-        <div *ngFor="let seat of reservation.seats;" class="seat" >
-            {{ seat }}
+        <div>
+            <div *ngFor="let seat of reservation.seats;" class="seat" >
+                {{ seat }}
+            </div>
         </div>
         <button class="btn btn-primary" style="margin: auto; width:30%;" (click)="cancel(reservation)">
             Cancel Reservation 
