@@ -1,6 +1,9 @@
 <div id="background">
     <div id="container">
-        <h3 style ="text-align:center"> Create match event</h3>
+        <div id="header">
+            <span id="title"> Create Match</span>
+        </div>
+        <!-- <h3 style ="text-align:center"> Create match event</h3> -->
         <form style="margin: 10%;" (ngSubmit)="form.valid && submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue)" #form="ngForm">
             <!-- Home team name -->
             <div id="form-group">
