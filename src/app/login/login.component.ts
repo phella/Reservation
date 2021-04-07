@@ -58,8 +58,10 @@ export class LoginComponent implements OnInit {
   next(): void {
     if(this.currentForm === 0) {
       this.request.checkUser(this.forms[0].value.username).subscribe( res => {
-        if(res)
+        if(res.free){
           this.currentForm = 1;
+          this.validUser = false;
+        }
         else
           this.validUser = true;
       });

@@ -8,8 +8,9 @@
 
 #container{
     width: auto;
-    height: 410px;
+    height: auto;
     margin: auto;
+    padding-bottom: 20px;
     border-radius: 15px;
     background-color: white;
     overflow:hidden;
@@ -44,6 +45,6 @@ button{
     }
     #container {
         width: 80%;
-        height: 420px;
+        height: auto;
     }
   }

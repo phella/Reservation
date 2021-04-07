@@ -18,11 +18,11 @@ export class RequestService {
 
   constructor(private http: HttpClient, private socket: Socket) { }
 
-  checkUser(userName: string): Observable<{Boolean}> {
+  checkUser(userName: string): Observable<{error, free}> {
     const userNameSent = userName
       ? { params: new HttpParams().set("username", userName) }
       : {};
-    return this.http.get<{Boolean}>(`${this.base}users/check`, userNameSent);
+    return this.http.get<{error, free}>(`${this.base}users/check`, userNameSent);
   }
   
   signup(user): Observable<{Boolean}> {
