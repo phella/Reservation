@@ -21,12 +21,15 @@ export class HomePageComponent implements OnInit {
   credit: Boolean[];
   taken: Boolean[];
   payForm: FormGroup;
-  currenturl: String
+  currenturl: String;
+  type: String = "guest";
 
   constructor(private fb: FormBuilder, private req: RequestService, private router: Router,  private socket: Socket) { 
   }
 
   ngOnInit(): void {
+
+    // Sockets
     this.socket.on("New Reservation",reservation =>{
       for(let i = 0; i < reservation.seats.length; i++){
         let row = reservation.seats[i]["seat_row"];
@@ -37,6 +40,15 @@ export class HomePageComponent implements OnInit {
     });
 
     this.currenturl = this.router.url;
+    
+    if(localStorage.getItem("type") === "false")
+      this.type = "user";
+    else if(localStorage.getItem("type") === "true")
+      this.type = "manager";
+
+    console.log(this.type);
+    
+    // Form initialization
     this.payForm = this.fb.group({
       credit : ['', Validators.required],
       bin : ['', Validators.required]
@@ -82,15 +94,17 @@ export class HomePageComponent implements OnInit {
   }
 
   request(match: number, row: number, col: number):void {
-    if( this.seats[match][row][col] != 2) {
-      let temp = this.pending.map(function(e: {match, row, col}) { return e.match + "/" + e.row + "/" + e.col })
-      let index = temp.indexOf(match + "/" + row + "/" + col);
-      if(index == -1 ) {
-        this.pending.push({match, row, col});
-        this.seats[match][row][col] = 1;
-      } else {
-        this.pending.splice(index, 1);
-        this.seats[match][row][col] = 0;
+    if( this.type == "user") {
+      if( this.seats[match][row][col] != 2) {
+        let temp = this.pending.map(function(e: {match, row, col}) { return e.match + "/" + e.row + "/" + e.col })
+        let index = temp.indexOf(match + "/" + row + "/" + col);
+        if(index == -1 ) {
+          this.pending.push({match, row, col});
+          this.seats[match][row][col] = 1;
+        } else {
+          this.pending.splice(index, 1);
+          this.seats[match][row][col] = 0;
+        }
       }
     }
   }
@@ -153,5 +167,14 @@ export class HomePageComponent implements OnInit {
         this.seats.push(new_temp);
       }
     }
+  }
+
+  route2Signup(){
+    this.router.navigate(['/signup']);
+  }
+
+  
+  route2Signin(){
+    this.router.navigate(['/login/user']);
   }
 }
