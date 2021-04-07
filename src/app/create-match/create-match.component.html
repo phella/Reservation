@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div id="background">
-    <div id="container" style="margin-top:50px;">
+    <div id="container" style="margin-top:50px; margin-bottom: 20px;">
         <div id="header">
             <span id="title"> Create Match</span>
         </div>
         <!-- <h3 style ="text-align:center"> Create match event</h3> -->
-        <form style="margin: 10%;" (ngSubmit)="form.valid && submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue)" #form="ngForm">
+        <form style="margin: 15%;" (ngSubmit)="form.valid && submit(homeTeamValue,awayTeamValue,dateValue,mainRefreeValue,lines1ManValue,lines2ManValue)" #form="ngForm">
             <!-- Home team name -->
             <div id="form-group">
                 <label for="homeTeam">Home Team Name </label>

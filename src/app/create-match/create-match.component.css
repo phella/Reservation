@@ -34,3 +34,12 @@ button{
     margin-right: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+    #header {
+      font-size: 1.4em;
+    }
+    #container {
+        width: 80%;
+        height: auto;
+    }
+  }
