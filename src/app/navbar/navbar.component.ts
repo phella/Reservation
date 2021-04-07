@@ -26,20 +26,23 @@ export class NavbarComponent implements OnInit {
     }
 
     switch(currenturl){
+      case('/admin/approve'):
       case('/home'): {
         this.page = 1;
         break;
       }
-      case('/reservations'):{
-        this.page = 2 ;
-        break;
-      }
-      case('/admin/approve'): {
-        this.page = 1;
-        break;
-      }
+      case('/reservations'):
+      case('/create-match'):
       case('/admin/deleteAccount'): {
         this.page = 2;
+        break;
+      }
+      case('/edit-match'):{
+        this.page = 3;
+        break;
+      }
+      case('/addStadium'):{
+        this.page = 4;
         break;
       }
     }
